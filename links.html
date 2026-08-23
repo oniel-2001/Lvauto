@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LV Auto Market — Links</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500&display=swap');
+
+  :root{
+    --obsidian:#0b0b0c;
+    --panel:#141416;
+    --ivory:#ece7dd;
+    --ivory-dim:#948f83;
+    --gold:#c9a961;
+    --gold-soft:#a58a53;
+    --line:rgba(236,231,221,0.10);
+    --line-gold:rgba(201,169,97,0.32);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:
+      radial-gradient(ellipse 700px 400px at 50% -5%, rgba(201,169,97,0.10), transparent 60%),
+      var(--obsidian);
+    color:var(--ivory);
+    font-family:'Inter',sans-serif;font-weight:300;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  .page{max-width:440px;margin:0 auto;padding:56px 24px 48px;}
+
+  /* PROFILE */
+  .profile{text-align:center;margin-bottom:40px;}
+  .avatar{
+    width:92px;height:92px;margin:0 auto 22px;
+    border-radius:50%;border:1px solid var(--line-gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-size:1.5rem;color:var(--gold);
+    background:linear-gradient(160deg,#1a1a1c,#0e0e0f);
+    letter-spacing:0.02em;
+  }
+  .avatar em{font-style:italic;}
+  .profile h1{
+    font-family:'Fraunces',serif;font-weight:500;font-size:1.65rem;letter-spacing:-0.01em;
+  }
+  .profile h1 em{font-style:italic;color:var(--gold);font-weight:400;}
+  .profile .handle{
+    font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--gold-soft);margin-top:12px;
+  }
+  .profile .bio{
+    font-size:0.88rem;color:var(--ivory-dim);line-height:1.65;margin-top:16px;
+  }
+
+  /* PRIMARY CTA */
+  .primary{
+    display:block;text-align:center;
+    background:var(--gold);color:var(--obsidian);
+    padding:18px;margin-bottom:14px;
+    font-size:0.76rem;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;
+    transition:background .25s, transform .2s;
+  }
+  .primary:active{transform:scale(0.985);}
+  .primary:hover{background:#ddc079;}
+
+  /* LINKS */
+  .link{
+    display:flex;align-items:center;gap:16px;
+    background:var(--panel);border:1px solid var(--line);
+    padding:18px 20px;margin-bottom:12px;
+    transition:border-color .25s, background .25s, transform .2s;
+  }
+  .link:hover{border-color:var(--line-gold);background:#18181a;}
+  .link:active{transform:scale(0.985);}
+  .link .icon{
+    width:34px;height:34px;flex-shrink:0;
+    border:1px solid var(--line-gold);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);font-size:0.85rem;
+  }
+  .link .txt{flex:1;}
+  .link .txt strong{
+    display:block;font-weight:400;font-size:0.95rem;color:var(--ivory);
+  }
+  .link .txt span{
+    display:block;font-size:0.74rem;color:var(--ivory-dim);margin-top:3px;
+  }
+  .link .chev{color:var(--ivory-dim);font-size:0.9rem;}
+
+  /* DIVIDER */
+  .divider{
+    display:flex;align-items:center;gap:14px;
+    margin:32px 0 20px;
+  }
+  .divider::before,.divider::after{
+    content:'';flex:1;height:1px;background:var(--line);
+  }
+  .divider span{
+    font-size:0.62rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-soft);
+  }
+
+  /* SOCIAL */
+  .social{display:flex;justify-content:center;gap:14px;margin-top:8px;}
+  .social a{
+    width:42px;height:42px;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ivory-dim);font-size:0.72rem;letter-spacing:0.04em;
+    transition:border-color .25s,color .25s;
+  }
+  .social a:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* FOOTER */
+  footer{
+    margin-top:40px;text-align:center;
+  }
+  footer .brand{
+    font-family:'Fraunces',serif;font-size:0.85rem;color:var(--ivory-dim);
+  }
+  footer .fine{
+    font-size:0.66rem;color:#5c584f;line-height:1.6;margin-top:12px;
+  }
+  ::selection{background:var(--gold);color:var(--obsidian);}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="profile">
+    <div class="avatar">LV<em>·</em></div>
+    <h1>LV <em>Auto</em> Market</h1>
+    <div class="handle">Las Vegas, Nevada</div>
+    <p class="bio">Your direct line to Chevrolet inventory in Las Vegas. New, pre-owned, trades, and performance — handled personally.</p>
+  </div>
+
+  <a href="sms:7029375542" class="primary">Text Me Directly</a>
+
+  <a href="inventory.html" class="link">
+    <div class="icon">◈</div>
+    <div class="txt"><strong>Check Inventory</strong><span>New & pre-owned, updated daily</span></div>
+    <div class="chev">›</div>
+  </a>
+
+  <a href="inventory.html?deal=1" class="link">
+    <div class="icon">$</div>
+    <div class="txt"><strong>Market Deals</strong><span>Current specials & offers</span></div>
+    <div class="chev">›</div>
+  </a>
+
+  <a href="trade.html" class="link">
+    <div class="icon">⇄</div>
+    <div class="txt"><strong>Value My Trade</strong><span>VIN, miles, payoff — I'll run the numbers</span></div>
+    <div class="chev">›</div>
+  </a>
+
+  <a href="buying-power.html" class="link">
+    <div class="icon">✓</div>
+    <div class="txt"><strong>Check Buying Power</strong><span>No hard credit pull</span></div>
+    <div class="chev">›</div>
+  </a>
+
+  <a href="tel:7029375542" class="link">
+    <div class="icon">☎</div>
+    <div class="txt"><strong>Call Me</strong><span>(702) 937-5542</span></div>
+    <div class="chev">›</div>
+  </a>
+
+  <div class="divider"><span>Follow</span></div>
+
+  <div class="social">
+    <a href="#" aria-label="TikTok">TT</a>
+    <a href="#" aria-label="Facebook">FB</a>
+    <a href="#" aria-label="YouTube">YT</a>
+  </div>
+
+  <footer>
+    <div class="brand">lvautomarket.com</div>
+    <p class="fine">LV Auto Market is a marketing and lead-generation brand. Vehicle sales are completed through Findlay Chevrolet, subject to dealership terms, availability, taxes, fees, incentives and applicable qualifications.</p>
+  </footer>
+
+</div>
+</body>
+</html>
