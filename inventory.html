@@ -284,18 +284,8 @@
    Each vehicle needs: year, make, model, trim, type,
    condition, price, miles, deal (savings), photo (URL).
    --------------------------------------------------------- */
-const VEHICLES = [const VEHICLES = [
+const VEHICLES = [
   {year:2024, make:"Chevrolet", model:"Corvette Z06", trim:"3LZ", type:"Car", condition:"Pre-Owned", price:120399, miles:13571, deal:9501, photo:"https://vehicle-images.carscommerce.inc/ed90-110012339/1G1YF3D36R5604538/7e151c8e01a5d4a07a8b221999753b95.jpg"}
-];
-  {year:2026, make:"Chevrolet", model:"Silverado 1500", trim:"LT Crew Cab 4WD", type:"Truck", condition:"New", price:52400, miles:8, deal:1000, photo:""},
-  {year:2026, make:"Chevrolet", model:"Equinox", trim:"RS AWD", type:"SUV", condition:"New", price:34900, miles:12, deal:0, photo:""},
-  {year:2026, make:"Chevrolet", model:"Tahoe", trim:"Z71 4WD", type:"SUV", condition:"New", price:71850, miles:5, deal:2000, photo:""},
-  {year:2026, make:"Chevrolet", model:"Corvette Stingray", trim:"2LT Coupe", type:"Car", condition:"New", price:84995, miles:22, deal:0, photo:""},
-  {year:2025, make:"Chevrolet", model:"Colorado", trim:"Trail Boss", type:"Truck", condition:"Pre-Owned", price:41200, miles:14320, deal:1500, photo:""},
-  {year:2025, make:"Chevrolet", model:"Traverse", trim:"LT Leather", type:"SUV", condition:"Pre-Owned", price:38600, miles:19870, deal:0, photo:""},
-  {year:2024, make:"Chevrolet", model:"Silverado 2500HD", trim:"LTZ Duramax", type:"Truck", condition:"Pre-Owned", price:63400, miles:31200, deal:2500, photo:""},
-  {year:2024, make:"Chevrolet", model:"Blazer", trim:"RS AWD", type:"SUV", condition:"Pre-Owned", price:33750, miles:24500, deal:0, photo:""},
-  {year:2023, make:"Chevrolet", model:"Camaro", trim:"SS 1LE", type:"Car", condition:"Pre-Owned", price:44900, miles:18400, deal:1200, photo:""}
 ];
 
 const APR = 0.079, TERM = 72, DOWN_PCT = 0.10;
@@ -308,7 +298,7 @@ const payment = p => {
 };
 
 const el = id => document.getElementById(id);
-const grid = el("grid");
+const grid = el("grid"); 
 
 function card(v){
   const badge = v.deal > 0
