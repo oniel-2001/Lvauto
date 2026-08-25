@@ -323,17 +323,9 @@
    condition, price, miles, deal (savings), photo (URL).
    --------------------------------------------------------- */
 const VEHICLES = [
-  {year:2026, make:"Chevrolet", model:"Silverado 1500", trim:"LT Crew Cab 4WD", type:"Truck", condition:"New", price:52400, miles:8, deal:1000, photo:""},
-  {year:2026, make:"Chevrolet", model:"Equinox", trim:"RS AWD", type:"SUV", condition:"New", price:34900, miles:12, deal:0, photo:""},
-  {year:2026, make:"Chevrolet", model:"Tahoe", trim:"Z71 4WD", type:"SUV", condition:"New", price:71850, miles:5, deal:2000, photo:""},
-  {year:2026, make:"Chevrolet", model:"Corvette Stingray", trim:"2LT Coupe", type:"Car", condition:"New", price:84995, miles:22, deal:0, photo:""},
-  {year:2025, make:"Chevrolet", model:"Colorado", trim:"Trail Boss", type:"Truck", condition:"Pre-Owned", price:41200, miles:14320, deal:1500, photo:""},
-  {year:2025, make:"Chevrolet", model:"Traverse", trim:"LT Leather", type:"SUV", condition:"Pre-Owned", price:38600, miles:19870, deal:0, photo:""},
-  {year:2024, make:"Chevrolet", model:"Silverado 2500HD", trim:"LTZ Duramax", type:"Truck", condition:"Pre-Owned", price:63400, miles:31200, deal:2500, photo:""},
-  {year:2024, make:"Chevrolet", model:"Blazer", trim:"RS AWD", type:"SUV", condition:"Pre-Owned", price:33750, miles:24500, deal:0, photo:""},
-  {year:2023, make:"Chevrolet", model:"Camaro", trim:"SS 1LE", type:"Car", condition:"Pre-Owned", price:44900, miles:18400, deal:1200, photo:""}
+  {year:2027, make:"Chevrolet", model:"Corvette Stingray", trim:"1LT", type:"Car", condition:"New", price:80144, miles:8, deal:0, photos:["https://assets.cai-media-management.com/resize/640x640/common-vehicle-media/ac56834b-4e31-4857-b6a9-208c912f9964.jpg","https://assets.cai-media-management.com/resize/640x640/common-vehicle-media/fd603801-7f79-4000-bd29-365769e3e2c3.jpg","https://assets.cai-media-management.com/resize/640x640/common-vehicle-media/3e9c5a0e-0768-4d5f-81a0-f5fdf53b44c2.jpg","https://assets.cai-media-management.com/resize/640x640/common-vehicle-media/abb5940c-3791-4940-a3d8-84f7ba984ea0.jpg"]}
 ];
-
+ 
 const APR = 0.079, TERM = 72, DOWN_PCT = 0.10;
 
 const money = n => "$" + n.toLocaleString("en-US");
