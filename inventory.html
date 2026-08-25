@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inventory — LV Auto Market</title>
+<meta name="description" content="Browse new and pre-owned Chevrolet inventory in Las Vegas. Filter by type, price, year and condition. Vehicles sold through Findlay Chevrolet.">
+<meta name="theme-color" content="#0b0b0c">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500&display=swap');
 
@@ -127,6 +129,42 @@
     padding:7px 12px;
   }
   .badge.new{background:transparent;color:var(--gold);border:1px solid var(--gold);}
+
+  /* ---- photo gallery ---- */
+  .media img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;opacity:0;transition:opacity .3s ease;
+  }
+  .media img.on{opacity:1;}
+  .nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:34px;height:34px;border:none;cursor:pointer;
+    background:rgba(11,11,12,.62);color:var(--ivory);
+    font-size:15px;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;transition:opacity .2s, background .2s;z-index:3;
+  }
+  .nav:hover{background:rgba(11,11,12,.88);}
+  .nav.prev{left:0;}
+  .nav.next{right:0;}
+  .card:hover .nav{opacity:1;}
+  .nav:focus-visible{opacity:1;outline:1px solid var(--gold);}
+  .dots{
+    position:absolute;bottom:9px;left:0;right:0;z-index:3;
+    display:flex;gap:5px;justify-content:center;
+  }
+  .dots i{
+    width:5px;height:5px;border-radius:50%;
+    background:rgba(236,231,221,.38);transition:background .2s,transform .2s;
+  }
+  .dots i.on{background:var(--gold);transform:scale(1.3);}
+  .shots{
+    position:absolute;top:0;right:0;z-index:3;
+    background:rgba(11,11,12,.62);color:var(--ivory-dim);
+    font-size:0.58rem;letter-spacing:0.12em;padding:6px 9px;
+  }
+  @media (hover:none){.nav{opacity:1;background:rgba(11,11,12,.5);}}
+
   .card-body{padding:20px;display:flex;flex-direction:column;flex:1;}
   .card .yr{font-size:0.66rem;letter-spacing:0.2em;color:var(--gold-soft);text-transform:uppercase;}
   .card h3{font-size:1.12rem;margin-top:8px;line-height:1.25;}
@@ -285,7 +323,15 @@
    condition, price, miles, deal (savings), photo (URL).
    --------------------------------------------------------- */
 const VEHICLES = [
-  {year:2024, make:"Chevrolet", model:"Corvette Z06", trim:"3LZ", type:"Car", condition:"Pre-Owned", price:120399, miles:13571, deal:9501, photo:"https://vehicle-images.carscommerce.inc/ed90-110012339/1G1YF3D36R5604538/7e151c8e01a5d4a07a8b221999753b95.jpg"}
+  {year:2026, make:"Chevrolet", model:"Silverado 1500", trim:"LT Crew Cab 4WD", type:"Truck", condition:"New", price:52400, miles:8, deal:1000, photo:""},
+  {year:2026, make:"Chevrolet", model:"Equinox", trim:"RS AWD", type:"SUV", condition:"New", price:34900, miles:12, deal:0, photo:""},
+  {year:2026, make:"Chevrolet", model:"Tahoe", trim:"Z71 4WD", type:"SUV", condition:"New", price:71850, miles:5, deal:2000, photo:""},
+  {year:2026, make:"Chevrolet", model:"Corvette Stingray", trim:"2LT Coupe", type:"Car", condition:"New", price:84995, miles:22, deal:0, photo:""},
+  {year:2025, make:"Chevrolet", model:"Colorado", trim:"Trail Boss", type:"Truck", condition:"Pre-Owned", price:41200, miles:14320, deal:1500, photo:""},
+  {year:2025, make:"Chevrolet", model:"Traverse", trim:"LT Leather", type:"SUV", condition:"Pre-Owned", price:38600, miles:19870, deal:0, photo:""},
+  {year:2024, make:"Chevrolet", model:"Silverado 2500HD", trim:"LTZ Duramax", type:"Truck", condition:"Pre-Owned", price:63400, miles:31200, deal:2500, photo:""},
+  {year:2024, make:"Chevrolet", model:"Blazer", trim:"RS AWD", type:"SUV", condition:"Pre-Owned", price:33750, miles:24500, deal:0, photo:""},
+  {year:2023, make:"Chevrolet", model:"Camaro", trim:"SS 1LE", type:"Car", condition:"Pre-Owned", price:44900, miles:18400, deal:1200, photo:""}
 ];
 
 const APR = 0.079, TERM = 72, DOWN_PCT = 0.10;
@@ -298,15 +344,33 @@ const payment = p => {
 };
 
 const el = id => document.getElementById(id);
-const grid = el("grid"); 
+const grid = el("grid");
 
 function card(v){
   const badge = v.deal > 0
     ? `<div class="badge">Save ${money(v.deal)}</div>`
     : (v.condition === "New" ? `<div class="badge new">New</div>` : "");
-  const media = v.photo
-    ? `<div class="media" style="background-image:url('${v.photo}');background-size:cover;background-position:center;">${badge}</div>`
-    : `<div class="media">${badge}Vehicle Photo</div>`;
+  // acepta photos:["a","b"] o el viejo photo:"a"
+  const pics = (Array.isArray(v.photos) ? v.photos : (v.photo ? [v.photo] : [])).filter(Boolean);
+
+  let media;
+  if (!pics.length) {
+    media = `<div class="media">${badge}Vehicle Photo</div>`;
+  } else if (pics.length === 1) {
+    media = `<div class="media"><img class="on" src="${pics[0]}" alt="" loading="lazy">${badge}</div>`;
+  } else {
+    const imgs = pics.map((p,i) =>
+      `<img class="${i===0?"on":""}" src="${p}" alt="" loading="${i===0?"eager":"lazy"}">`).join("");
+    const dots = pics.map((_,i) => `<i class="${i===0?"on":""}"></i>`).join("");
+    media = `
+      <div class="media gal" data-i="0">
+        ${imgs}${badge}
+        <div class="shots">${pics.length} photos</div>
+        <button class="nav prev" aria-label="Previous photo">‹</button>
+        <button class="nav next" aria-label="Next photo">›</button>
+        <div class="dots">${dots}</div>
+      </div>`;
+  }
   const milesTxt = v.miles < 100 ? `${v.miles} mi` : `${v.miles.toLocaleString("en-US")} mi`;
   const smsBody = encodeURIComponent(`Hi, I'm interested in the ${v.year} ${v.make} ${v.model} ${v.trim}.`);
   return `
@@ -366,6 +430,40 @@ function render(){
          <p>Try widening your search — or text me at (702) 937-5542 and I'll find it for you.</p>
        </div>`;
 }
+
+/* ---- galería: flechas, puntos y swipe ---- */
+function show(gal, i){
+  const imgs = gal.querySelectorAll("img");
+  const dots = gal.querySelectorAll(".dots i");
+  const n = imgs.length;
+  i = (i + n) % n;
+  gal.dataset.i = i;
+  imgs.forEach((im,k) => im.classList.toggle("on", k === i));
+  dots.forEach((d,k) => d.classList.toggle("on", k === i));
+}
+
+grid.addEventListener("click", e => {
+  const b = e.target.closest(".nav");
+  if(!b) return;
+  e.preventDefault();
+  const gal = b.closest(".gal");
+  show(gal, +gal.dataset.i + (b.classList.contains("next") ? 1 : -1));
+});
+
+let sx = 0, sy = 0;
+grid.addEventListener("touchstart", e => {
+  sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+}, {passive:true});
+
+grid.addEventListener("touchend", e => {
+  const gal = e.target.closest(".gal");
+  if(!gal) return;
+  const dx = e.changedTouches[0].clientX - sx;
+  const dy = e.changedTouches[0].clientY - sy;
+  if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){
+    show(gal, +gal.dataset.i + (dx < 0 ? 1 : -1));
+  }
+}, {passive:true});
 
 ["q","type","price","year","cond","sort"].forEach(id => {
   el(id).addEventListener("input", render);
